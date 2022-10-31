@@ -31,7 +31,8 @@
       text-decoration: none;
     }
   }
-  li:first-child {
+
+  .navactive {
     a {
       color: var(--purple);
     }

@@ -1,9 +1,9 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
 import styles from './styles.module.scss';
 
 export function Header() {
-  const navigate = useNavigate()
+  const { pathname } = useLocation();
   return (
     <>
       <div className={styles.wrapper}>
@@ -11,13 +11,19 @@ export function Header() {
       </div>
       <nav className={styles.nav}>
         <ul>
-          <li>
+          <li className={pathname === '/' ? styles.navactive : ''}>
             <Link to="/">Home</Link>
           </li>
-          <li>
+          <li
+            className={
+              pathname.includes('/buscarendereco') ? styles.navactive : ''
+            }
+          >
             <Link to="/buscarendereco">Buscar Endereço</Link>
           </li>
-          <li>
+          <li
+            className={pathname.includes('/buscarcep') ? styles.navactive : ''}
+          >
             <Link to="/buscarcep">Buscar CEP</Link>
           </li>
         </ul>
