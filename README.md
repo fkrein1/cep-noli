@@ -1,5 +1,5 @@
 # CEP Noli
-A zip code and adress search app
+A zip code and address search app
 - Built with React, Typescript, React Query, and Vite.
 - Styles with Sass and CSS Modules
 </br>
