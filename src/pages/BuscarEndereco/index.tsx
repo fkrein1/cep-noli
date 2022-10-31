@@ -1,18 +1,9 @@
-import axios from 'axios';
 import { useState } from 'react';
 import InputMask from 'react-input-mask';
 import { useNavigate } from 'react-router-dom';
+import { getAdress } from '../../services/api';
 import styles from './styles.module.scss';
 
-interface ICEP {
-  data: {
-    bairro: string;
-    cep: string;
-    localidade: string;
-    logradouro: string;
-    uf: string;
-  };
-}
 export function BuscarEndereco() {
   const [cep, setCep] = useState('');
   const navigate = useNavigate();
@@ -22,9 +13,7 @@ export function BuscarEndereco() {
   async function handleSearchCep() {
     const formatedCep = cep.replace('-', '');
     try {
-      const { data } = (await axios.get(
-        `https://viacep.com.br/ws/${formatedCep}/json/`,
-      )) as ICEP;
+      const data = await getAdress(formatedCep);
       alert(`
         Logradouro: ${data.logradouro}
         Bairro: ${data.bairro}
@@ -38,7 +27,7 @@ export function BuscarEndereco() {
 
   return (
     <div className={styles.wrapper}>
-      <label htmlFor="cep">Digite um CEP</label>
+      <label htmlFor="cep">CEP</label>
       <InputMask
         id="cep"
         mask="99999-999"
