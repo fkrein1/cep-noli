@@ -21,6 +21,7 @@ interface City {
 
 export async function getAdress(cep: string): Promise<CEP> {
   const { data } = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+  if (data.erro) throw new Error();
   return data;
 }
 
@@ -46,5 +47,7 @@ export async function getCep(
   const { data } = await axios.get(
     `https://viacep.com.br/ws/${uf}/${city}/${street}/json/`,
   );
+  if (data.length === 0) throw new Error();
+
   return data[0];
 }
